@@ -1,0 +1,769 @@
+/* 1. VARIABLES  */
+/* Colours and fonts are stored once here and reused with var(--name) */
+:root {
+  --primary: #6F4E37;   /* coffee brown */
+  --cream: #F5E9DA;     /* cream */
+  --accent: #D9822B;    /* savanna orange */
+  --dark: #2B1B12;      /* dark text */
+  --white: #FFFFFF;
+
+  --font-heading: "Playfair Display", Georgia, serif;
+  --font-body: "Open Sans", Arial, sans-serif;
+}
+
+
+/* 2. BASE STYLES */
+
+/* Makes width and height include padding and borders (easier sizing) */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--dark);
+  background-color: var(--cream);
+}
+
+/* Images never get wider than their container */
+img {
+  display: block;
+  max-width: 100%;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-heading);
+  line-height: 1.3;
+  margin: 0 0 10px 0;
+}
+
+p {
+  margin: 0 0 16px 0;
+}
+
+a {
+  color: var(--primary);
+  transition: color 0.3s;
+}
+
+a:hover {
+  color: var(--dark);
+  text-decoration: underline;
+}
+
+/* Focus outline: shows which link, button or field is selected with the keyboard */
+a:focus,
+button:focus,
+input:focus,
+select:focus,
+textarea:focus {
+  outline: 3px solid var(--accent);
+}
+
+/* Keeps content centred and not too wide */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.page-section {
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+/* Heading with an orange line on each side */
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 32px;
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.section-title::before,
+.section-title::after {
+  content: "";
+  flex: 1;
+  height: 3px;
+  background-color: var(--accent);
+}
+
+
+/*  3. BUTTONS */
+.btn {
+  display: inline-block;
+  padding: 12px 28px;
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: bold;
+  color: var(--dark);
+  background-color: var(--accent);
+  border: none;
+  border-radius: 50px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btn:hover {
+  color: var(--white);
+  background-color: var(--primary);
+  text-decoration: none;
+  transform: translateY(-3px);
+}
+
+
+/* 4. HEADER AND NAVIGATION */
+.site-header {
+  background-color: var(--cream);
+  box-shadow: 0 2px 8px rgba(43, 27, 18, 0.2);
+}
+
+/* Flexbox: logo on the left, links on the right, in one row */
+.header-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+/* Logo image with the business name beside it */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+}
+
+.logo img {
+  height: 70px;
+  width: auto;
+}
+
+/* Cursive but readable handwriting font for the business name */
+.logo-text {
+  font-family: "Dancing Script", cursive;
+  font-size: 36px;
+  font-weight: bold;
+  color: var(--primary);
+}
+
+.nav-links {
+  display: flex;
+  gap: 8px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links a {
+  display: block;
+  padding: 8px 16px;
+  font-weight: 600;
+  color: var(--dark);
+  text-decoration: none;
+  border-radius: 8px;
+  transition: all 0.3s;
+}
+
+.nav-links a:hover {
+  background-color: var(--accent);
+}
+
+/* The link of the page you are on (written after hover so it stays brown) */
+.nav-links a.active {
+  background-color: var(--primary);
+  color: var(--white);
+}
+
+
+/* 5. HOME PAGE */
+
+/* Hero: a dark gradient sits on top of the photo so the white text is easy to read */
+.hero {
+  display: flex;
+  align-items: center;
+  min-height: 480px;
+  color: var(--white);
+  background-color: var(--primary);
+  background-image: linear-gradient(90deg, rgba(43, 27, 18, 0.8), rgba(43, 27, 18, 0.15)),
+                    url("../images/hero.jpeg");
+  background-size: cover;
+  background-position: center;
+}
+
+.hero-content {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  animation: fadeIn 1s;      /* text fades in. */
+}
+
+.hero h1 {
+  max-width: 560px;
+  font-size: 54px;
+}
+
+/* Animation used by the hero */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.welcome {
+  padding-top: 48px;
+  text-align: center;
+}
+
+.welcome p {
+  max-width: 700px;
+  margin: 0 auto 16px auto;
+  font-size: 18px;
+}
+
+.favourites {
+  padding-top: 32px;
+  padding-bottom: 40px;
+}
+
+/* Flexbox: the three cards sit side by side in one horizontal row */
+.cards {
+  display: flex;
+  gap: 24px;
+}
+
+.card {
+  flex: 1;                  /* every card gets equal width */
+  overflow: hidden;
+  text-align: center;
+  background-color: var(--white);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(43, 27, 18, 0.2);
+  transition: all 0.3s;
+}
+
+/* Hover: the card lifts up and the shadow gets bigger */
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 24px rgba(43, 27, 18, 0.3);
+}
+
+/* object-fit: cover crops the photos so all cards have the same image size */
+.card img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+
+.card-body {
+  padding: 16px;
+}
+
+.card h3 {
+  font-size: 22px;
+}
+
+.price {
+  display: inline-block;
+  margin: 0;
+  padding: 5px 20px;
+  font-weight: bold;
+  color: var(--dark);
+  background-color: var(--accent);
+  border-radius: 50px;
+}
+
+.cta {
+  padding: 48px 0;
+  text-align: center;
+  color: var(--white);
+  background-color: var(--primary);
+}
+
+.cta .btn:hover {
+  color: var(--primary);
+  background-color: var(--white);
+}
+
+
+/* 6. FOOTER */
+.site-footer {
+  padding-top: 40px;
+  color: var(--cream);
+  background-color: var(--dark);
+}
+
+/* Flexbox: three columns side by side */
+.footer-columns {
+  display: flex;
+  justify-content: space-between;
+  gap: 32px;
+}
+
+.footer-col {
+  flex: 1;
+}
+
+.footer-col h2 {
+  font-size: 20px;
+  color: var(--accent);
+}
+
+.footer-col ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.footer-col li {
+  margin-bottom: 6px;
+}
+
+.footer-col address {
+  font-style: normal;
+}
+
+.site-footer a {
+  color: var(--cream);
+}
+
+.site-footer a:hover {
+  color: var(--accent);
+}
+
+.copyright {
+  margin: 32px 0 0 0;
+  padding: 16px;
+  font-size: 14px;
+  text-align: center;
+  border-top: 1px solid rgba(245, 233, 218, 0.3);
+}
+
+
+/* 7. PAGE BANNERS (About, Menu, Gallery, Contact) */
+.page-banner {
+  padding: 56px 20px;
+  text-align: center;
+  color: var(--white);
+  background-color: var(--primary);
+  background-image: linear-gradient(rgba(111, 78, 55, 0.85), rgba(43, 27, 18, 0.9)),
+                    url("../images/hero.jpeg");
+  background-size: cover;
+  background-position: center;
+}
+
+.page-banner h1 {
+  margin-bottom: 5px;
+  font-size: 44px;
+}
+
+.page-banner p {
+  margin: 0;
+  font-size: 20px;
+  font-style: italic;
+}
+
+
+/* 8. ABOUT PAGE */
+
+/* Flexbox: photo on the left, text on the right */
+.about-story {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.about-photo {
+  flex: 0 0 40%;            /* photo takes 40% of the width */
+}
+
+.about-photo img {
+  width: 100%;
+  height: 420px;
+  object-fit: cover;
+  border: 4px solid var(--accent);
+  border-radius: 24px;      /* rounded owner photo */
+  box-shadow: 0 4px 12px rgba(43, 27, 18, 0.2);
+}
+
+.about-text {
+  flex: 1;
+}
+
+.about-text h2 {
+  font-size: 36px;
+}
+
+/* Owner quote with a left border */
+blockquote {
+  margin: 24px 0 0 0;
+  padding: 16px 24px;
+  font-size: 18px;
+  font-style: italic;
+  background-color: var(--white);
+  border-left: 6px solid var(--accent);
+  border-radius: 0 12px 12px 0;
+}
+
+blockquote p {
+  margin-bottom: 8px;
+}
+
+blockquote cite {
+  font-style: normal;
+  font-weight: bold;
+  color: var(--primary);
+}
+
+/* The unordered list of values shown as three cards */
+.values-list {
+  display: flex;
+  gap: 24px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.values-list li {
+  flex: 1;
+  padding: 24px;
+  text-align: center;
+  background-color: var(--white);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(43, 27, 18, 0.2);
+  transition: all 0.3s;
+}
+
+.values-list li:hover {
+  transform: translateY(-5px);
+}
+
+.values-list .icon {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 36px;
+}
+
+.values-list h3 {
+  color: var(--primary);
+}
+
+.values-list p {
+  margin: 0;
+}
+
+
+/* 9. MENU TABLES */
+.menu-category {
+  margin-bottom: 40px;
+}
+
+.menu-category h2 {
+  display: inline-block;
+  margin-bottom: 12px;
+  font-size: 30px;
+  border-bottom: 4px solid var(--accent);
+}
+
+/* On small screens the table scrolls sideways inside this box */
+.table-wrap {
+  overflow-x: auto;
+  background-color: var(--white);
+  border: 1px solid #D8C3AA;
+  border-radius: 12px;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.menu-category .data-table {
+  min-width: 460px;         /* forces the scroll on narrow screens */
+}
+
+.data-table th,
+.data-table td {
+  padding: 12px 16px;
+  text-align: left;
+}
+
+/* Header row in the primary colour */
+.data-table thead th {
+  color: var(--white);
+  background-color: var(--primary);
+}
+
+/* Zebra stripes: odd rows white, even rows light cream */
+.data-table tbody tr:nth-child(odd) {
+  background-color: var(--white);
+}
+
+.data-table tbody tr:nth-child(even) {
+  background-color: #FAF3EA;
+}
+
+/* Row highlight when you hover over it */
+.data-table tbody tr {
+  transition: background-color 0.3s;
+}
+
+.data-table tbody tr:hover {
+  background-color: #F2D9B5;
+}
+
+/* Prices lined up on the right */
+.data-table .col-price {
+  text-align: right;
+}
+
+
+/* 10. GALLERY */
+
+/* Grid is used for the gallery because the photos sit in rows AND columns.
+   Flexbox is used for the navigation because it is just one row. */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);   /* 4 equal columns */
+  gap: 20px;
+}
+
+.gallery-grid figure {
+  margin: 0;
+  overflow: hidden;          /* hides the part of the photo that grows outside on hover */
+  background-color: var(--white);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(43, 27, 18, 0.2);
+}
+
+.gallery-grid img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;         /* fills the box without stretching the photo */
+  transition: transform 0.4s;
+}
+
+/* Hover: the photo zooms in */
+.gallery-grid figure:hover img {
+  transform: scale(1.1);
+}
+
+.gallery-grid figcaption {
+  position: relative;        /* keeps the caption above the zoomed photo */
+  padding: 12px;
+  text-align: center;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  background-color: var(--white);
+}
+
+
+/* 11. CONTACT PAGE AND FORM */
+
+/* Flexbox: form on the left, info on the right */
+.contact-layout {
+  display: flex;
+  align-items: flex-start;
+  gap: 32px;
+}
+
+.contact-box {
+  flex: 1;
+  padding: 24px;
+  background-color: var(--white);
+  border-top: 6px solid var(--primary);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(43, 27, 18, 0.2);
+}
+
+.contact-box h2 {
+  font-size: 26px;
+}
+
+.contact-details {
+  margin: 0 0 24px 0;
+  padding: 0;
+  list-style: none;
+}
+
+.contact-details li {
+  margin-bottom: 6px;
+}
+
+.form-row {
+  margin-bottom: 16px;
+}
+
+.reservation-form label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 600;
+}
+
+/* Every field fills 100% of its column */
+.reservation-form input,
+.reservation-form select,
+.reservation-form textarea {
+  width: 100%;
+  padding: 11px;
+  font-family: var(--font-body);
+  font-size: 16px;
+  color: var(--dark);
+  background-color: var(--cream);
+  border: 2px solid #CDB9A3;
+  border-radius: 8px;
+}
+
+.reservation-form input:focus,
+.reservation-form select:focus,
+.reservation-form textarea:focus {
+  border-color: var(--accent);
+}
+
+.reservation-form fieldset {
+  margin: 0 0 16px 0;
+  padding: 12px 16px;
+  border: 2px solid #CDB9A3;
+  border-radius: 8px;
+}
+
+.reservation-form legend {
+  padding: 0 8px;
+  font-weight: 600;
+}
+
+/* Radio buttons sit in a row. These rules come after the ones above on purpose,
+   so they override them for the radio buttons only. */
+.radio-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.radio-group label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  font-weight: normal;
+}
+
+.radio-group input {
+  width: auto;
+  padding: 0;
+}
+
+.reservation-form .btn {
+  width: 100%;
+}
+
+.map-link {
+  margin-top: 24px;
+}
+
+
+/* 12. MEDIA QUERIES (RESPONSIVE) */
+
+/* Tablet: gallery changes from 4 columns to 2 */
+@media (max-width: 992px) {
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* 768px and below: the layout changes for tablets and phones */
+@media (max-width: 768px) {
+
+  /* Header: links stack under the logo */
+  .header-inner {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  nav {
+    width: 100%;
+  }
+
+  .logo-text {
+    font-size: 30px;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  /* Smaller headings */
+  .hero {
+    min-height: 380px;
+  }
+
+  .hero h1 {
+    font-size: 36px;
+  }
+
+  .page-banner h1 {
+    font-size: 34px;
+  }
+
+  .section-title {
+    font-size: 26px;
+  }
+
+  /* Cards stay in a row and you swipe sideways inside the box */
+  .cards {
+    padding: 8px 8px 16px 8px;
+    overflow-x: auto;
+  }
+
+  .card {
+    flex: 0 0 75%;           /* each card is 75% wide and does not shrink */
+  }
+
+  /* About page: photo above the text, values stacked */
+  .about-story {
+    flex-direction: column;
+  }
+
+  .about-photo {
+    flex: none;
+    width: 100%;
+    max-width: 360px;
+  }
+
+  .about-photo img {
+    height: 320px;
+  }
+
+  .values-list {
+    flex-direction: column;
+  }
+
+  /* Contact page: form first, info below */
+  .contact-layout {
+    flex-direction: column;
+  }
+
+  .contact-box {
+    width: 100%;
+  }
+
+  /* Footer columns stack */
+  .footer-columns {
+    flex-direction: column;
+  }
+}
+
+/* Phone: gallery becomes 1 column */
+@media (max-width: 600px) {
+  .gallery-grid {
+    grid-template-columns: 1fr;
+  }
+}
